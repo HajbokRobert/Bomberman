@@ -8,7 +8,6 @@ Bomberman.Player = function (game_state, name, position, properties) {
 
     this.walking_speed = +properties.walking_speed;
     this.bomb_duration = +properties.bomb_duration;
-    this.dropping_bomb = false;
 
     this.animations.add("walking_down", [1, 2, 3], 10, true);
     this.animations.add("walking_left", [4, 5, 6, 7], 10, true);
@@ -21,6 +20,12 @@ Bomberman.Player = function (game_state, name, position, properties) {
     this.body.setSize(14, 12, 0, 4);
 
     this.cursors = this.game_state.game.input.keyboard.createCursorKeys();
+
+    this.initial_position = new Phaser.Point(this.x, this.y);
+
+    this.number_of_lives = localStorage.number_of_lives || +properties.number_of_lives;
+    this.number_of_bombs = localStorage.number_of_bombs || +properties.number_of_bombs;
+    this.current_bomb_index = 0;
 };
 
 Bomberman.Player.prototype = Object.create(Bomberman.Prefab.prototype);
@@ -28,10 +33,13 @@ Bomberman.Player.prototype.constructor = Bomberman.Player;
 
 Bomberman.Player.prototype.update = function () {
     "use strict";
-    this.game_state.game.physics.arcade.collide(this, this.game_state.layers.collision);
+    var colliding_bombs;
+
+    this.game_state.game.physics.arcade.collide(this, this.game_state.layers.walls);
+    this.game_state.game.physics.arcade.collide(this, this.game_state.layers.blocks);
     this.game_state.game.physics.arcade.collide(this, this.game_state.groups.bombs);
-    this.game_state.game.physics.arcade.overlap(this, this.game_state.groups.explosions, this.kill, null, this);
-    this.game_state.game.physics.arcade.overlap(this, this.game_state.groups.enemies, this.kill, null, this);
+    this.game_state.game.physics.arcade.overlap(this, this.game_state.groups.explosions, this.die, null, this);
+    this.game_state.game.physics.arcade.overlap(this, this.game_state.groups.enemies, this.die, null, this);
 
     if (this.cursors.left.isDown && this.body.velocity.x <= 0) {
         // move left
@@ -75,13 +83,13 @@ Bomberman.Player.prototype.update = function () {
         this.frame = this.stopped_frames[this.body.facing];
     }
 
-    if (!this.dropping_bomb && this.game_state.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        this.drop_bomb();
-        this.dropping_bomb = true;
-    }
-
-    if (this.dropping_bomb && !this.game_state.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        this.dropping_bomb = false;
+    // if the spacebar is pressed and it is possible to drop another bomb, try dropping it
+    if (this.game_state.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.current_bomb_index < this.number_of_bombs) {
+        colliding_bombs = this.game_state.game.physics.arcade.getObjectsAtLocation(this.x, this.y, this.game_state.groups.bombs);
+        // drop the bomb only if it does not collide with another one
+        if (colliding_bombs.length === 0) {
+            this.drop_bomb();
+        }
     }
 };
 
@@ -93,4 +101,19 @@ Bomberman.Player.prototype.drop_bomb = function () {
     bomb_position = new Phaser.Point(this.x, this.y);
     bomb_properties = { "texture": "bomb_spritesheet", "group": "bombs", bomb_radius: 3 };
     bomb = Bomberman.create_prefab_from_pool(this.game_state.groups.bombs, Bomberman.Bomb.prototype.constructor, this.game_state, bomb_name, bomb_position, bomb_properties);
+    this.current_bomb_index += 1;
+};
+
+Bomberman.Player.prototype.die = function () {
+    "use strict";
+    // decrease the number of lives
+    this.number_of_lives -= 1;
+    if (this.game_state.prefabs.lives.number_of_lives <= 0) {
+        // if there are no more lives, it's game over
+        this.game_state.game_over();
+    } else {
+        // if there are remaining lives, restart the player position
+        this.x = this.initial_position.x;
+        this.y = this.initial_position.y;
+    }
 };

@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\maps\level1_map.tmx" />
+    <None Include="wwwroot\js\prefabs\Bomb.js" />
+    <None Include="wwwroot\js\prefabs\BombItem.js" />
+    <None Include="wwwroot\js\prefabs\Enemy.js" />
+    <None Include="wwwroot\js\prefabs\Explosion.js" />
+    <None Include="wwwroot\js\prefabs\Goal.js" />
+    <None Include="wwwroot\js\prefabs\Item.js" />
+    <None Include="wwwroot\js\prefabs\LifeItem.js" />
+    <None Include="wwwroot\js\prefabs\Lives.js" />
+    <None Include="wwwroot\js\prefabs\Player.js" />
+    <None Include="wwwroot\js\prefabs\Prefab.js" />
+    <None Include="wwwroot\js\prefabs\Target.js" />
+    <None Include="wwwroot\js\prefabs\TextPrefab.js" />
+    <None Include="wwwroot\js\states\BootState.js" />
+    <None Include="wwwroot\js\states\LoadingState.js" />
+    <None Include="wwwroot\js\states\TiledState.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
   </ItemGroup>
 
