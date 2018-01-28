@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <None Include="wwwroot\assets\maps\level1_map.tmx" />
+    <None Include="wwwroot\assets\maps\level2_map.tmx" />
+    <None Include="wwwroot\js\main.js" />
     <None Include="wwwroot\js\prefabs\Bomb.js" />
     <None Include="wwwroot\js\prefabs\BombItem.js" />
     <None Include="wwwroot\js\prefabs\Enemy.js" />
@@ -21,6 +23,8 @@
     <None Include="wwwroot\js\states\BootState.js" />
     <None Include="wwwroot\js\states\LoadingState.js" />
     <None Include="wwwroot\js\states\TiledState.js" />
+    <None Include="wwwroot\js\UserInput.js" />
+    <None Include="wwwroot\js\Utils.js" />
   </ItemGroup>
 
   <ItemGroup>

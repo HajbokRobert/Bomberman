@@ -1,0 +1,76 @@
+{
+  "keydown": {
+    "W": {
+      "callback": "player1.change_movement",
+      "args": [ 0, -1, true ]
+    },
+    "S": {
+      "callback": "player1.change_movement",
+      "args": [ 0, 1, true ]
+    },
+    "A": {
+      "callback": "player1.change_movement",
+      "args": [ -1, 0, true ]
+    },
+    "D": {
+      "callback": "player1.change_movement",
+      "args": [ 1, 0, true ]
+    },
+    "Q": {
+      "callback": "player1.try_dropping_bomb"
+    },
+    "I": {
+      "callback": "player2.change_movement",
+      "args": [ 0, -1, true ]
+    },
+    "K": {
+      "callback": "player2.change_movement",
+      "args": [ 0, 1, true ]
+    },
+    "J": {
+      "callback": "player2.change_movement",
+      "args": [ -1, 0, true ]
+    },
+    "L": {
+      "callback": "player2.change_movement",
+      "args": [ 1, 0, true ]
+    },
+    "U": {
+      "callback": "player2.try_dropping_bomb"
+    }
+  },
+  "keyup": {
+    "W": {
+      "callback": "player1.change_movement",
+      "args": [ 0, -1, false ]
+    },
+    "S": {
+      "callback": "player1.change_movement",
+      "args": [ 0, 1, false ]
+    },
+    "A": {
+      "callback": "player1.change_movement",
+      "args": [ -1, 0, false ]
+    },
+    "D": {
+      "callback": "player1.change_movement",
+      "args": [ 1, 0, false ]
+    },
+    "I": {
+      "callback": "player2.change_movement",
+      "args": [ 0, -1, false ]
+    },
+    "K": {
+      "callback": "player2.change_movement",
+      "args": [ 0, 1, false ]
+    },
+    "J": {
+      "callback": "player2.change_movement",
+      "args": [ -1, 0, false ]
+    },
+    "L": {
+      "callback": "player2.change_movement",
+      "args": [ 1, 0, false ]
+    }
+  }
+}

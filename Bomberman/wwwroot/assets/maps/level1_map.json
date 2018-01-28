@@ -47,7 +47,7 @@
         {
           "gid": 66,
           "height": 0,
-          "name": "player",
+          "name": "player1",
           "properties": {
             "frame": "65",
             "group": "players",
@@ -159,6 +159,24 @@
           "width": 18,
           "x": 16,
           "y": 144
+        },
+        {
+          "gid": 66,
+          "height": 0,
+          "name": "player2",
+          "properties": {
+            "frame": "65",
+            "group": "players",
+            "number_of_bombs": "1",
+            "number_of_lives": "3",
+            "texture": "player_spritesheet",
+            "walking_speed": "50"
+          },
+          "type": "player",
+          "visible": true,
+          "width": 0,
+          "x": 208,
+          "y": 224
         }
       ],
       "opacity": 1,
