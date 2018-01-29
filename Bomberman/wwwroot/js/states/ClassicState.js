@@ -30,7 +30,13 @@ Bomberman.ClassicState.prototype.game_over = function () {
 
 Bomberman.ClassicState.prototype.next_level = function () {
     "use strict";
-    localStorage.number_of_lives = this.prefabs.player.number_of_lives;
-    localStorage.number_of_bombs = this.prefabs.player.number_of_bombs;
+    localStorage[this.prefabs.player1.name] = JSON.stringify({
+        number_of_lives: this.prefabs.player1.number_of_lives,
+        number_of_bombs: this.prefabs.player1.number_of_bombs
+    });
+    localStorage[this.prefabs.player2.name] = JSON.stringify({
+        number_of_lives: this.prefabs.player2.number_of_lives,
+        number_of_bombs: this.prefabs.player2.number_of_bombs
+    });
     this.game.state.start("BootState", true, false, this.level_data.next_level, "ClassicState");
 };
