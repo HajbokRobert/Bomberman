@@ -1,1 +1,1 @@
-Simple Bomberman game to test out [Phaser](https://phaser.io/)
+# Simple Bomberman game to test out [Phaser](https://phaser.io/)
